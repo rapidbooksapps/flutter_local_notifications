@@ -35,7 +35,8 @@ abstract class FlutterLocalNotificationsPlatform extends PlatformInterface {
   }
 
   /// Schedules a notification to be shown at the specified time with an optional payload that is passed through when a notification is tapped on.
-  tzSchedule(int id, String title, String body, TZDateTime scheduledDate,
+  Future<void> tzSchedule(
+      int id, String title, String body, TZDateTime scheduledDate,
       {String payload}) async {
     throw UnimplementedError('tzSchedule() has not been implemented');
   }
