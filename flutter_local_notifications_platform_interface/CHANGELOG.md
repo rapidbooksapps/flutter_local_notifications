@@ -1,3 +1,6 @@
+## [1.0.2]
+* Added `tzSchedule()`, `tzShowDailyAtTime()`, `tzShowWeeklyAtDayAndTime()`
+
 ## [1.0.1]
 * Add `pendingNotificationRequests()`
 

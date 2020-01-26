@@ -1,4 +1,5 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:timezone/timezone.dart';
 
 import 'src/notification_app_launch_details.dart';
 import 'src/types.dart';
@@ -31,6 +32,27 @@ abstract class FlutterLocalNotificationsPlatform extends PlatformInterface {
   /// Show a notification with an optional payload that will be passed back to the app when a notification is tapped on.
   Future<void> show(int id, String title, String body, {String payload}) async {
     throw UnimplementedError('show() has not been implemented');
+  }
+
+  /// Schedules a notification to be shown at the specified time with an optional payload that is passed through when a notification is tapped on.
+  tzSchedule(int id, String title, String body, TZDateTime scheduledDate,
+      {String payload}) async {
+    throw UnimplementedError('tzSchedule() has not been implemented');
+  }
+
+  /// Shows a notification on a daily interval at the specified time.
+  Future<void> tzShowDailyAtTime(int id, String title, String body,
+      TZTime notificationTime, String timezone,
+      {String payload}) async {
+    throw UnimplementedError('tzShowDailyAtTime() has not been implemented');
+  }
+
+  /// Shows a notification on a daily interval at the specified time.
+  Future<void> tzShowWeeklyAtDayAndTime(
+      int id, String title, String body, Day day, TZTime notificationTime,
+      {String payload}) async {
+    throw UnimplementedError(
+        'tzShowWeeklyAtDayAndTime() has not been implemented');
   }
 
   /// Periodically show a notification using the specified interval.
