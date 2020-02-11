@@ -1,3 +1,22 @@
+# [1.1.6]
+* [iOS] Added ability to set badge number. Thanks to PR from [FelixYew](https://github.com/FelixYew)
+* Fixed a spelling mistake in the 1.1.5+1 changelog entry
+
+# [1.1.5+1]
+* No functional changes. Fixed a reported formatting issue.
+* Mention removal of named constructor argument in 1.1.0 changelog entry
+* Add API docs to `FlutterLocalNotificationsPlugin.private()` on how it could be used for testing
+* Update notes on testing to mention that the `FlutterLocalNotificationsPlugin.private()` named constructor may be of use
+
+# [1.1.5]
+* [Android] minor optimisation on scheduling related code so that `Gson` instance is reused instead of being rebuilt each time
+* Changed plugin to require 1.12.3+hotfix.5 or greater since pub has issues resolving 1.12.3+hotfix.6
+* Updated changelog entry for version 1.1.4 to mention removal of upper bound constraint on Flutter SDK requirement
+
+# [1.1.4]
+* Support v2 Android embedding. Note that there is currently a [known issue](https://github.com/flutter/flutter/issues/49365) in the Flutter SDK that will cause `onSelectNotification` to fire twice on Android. The fix is in the master channel but hasn't rolled out to other channels. Subscribe to the issue for updates.
+* Require Flutter SDK 1.12.3+hotfix.6 or greater. Maximum SDK restraint has also been removed
+
 # [1.1.3]
 * Expose `NotificationAppLaunchDetails` via main plugin
 * Retroactively updated changelog for 1.1.0 to indicate breaking change on moving to using platform interface
@@ -16,6 +35,7 @@
   *Note*: this may have inadvertently broke some tests for users as the plugin now checks which platform the plugin is executing code on and would throw an `UnimplementedError` since neither iOS or Android can be detected. Another issue is that `NotificationAppLaunchDetails` was no longer exposed via the main plugin. Please upgrade to 1.1.3 to have both of these issues fixed
 * **BREAKING CHANGE** Plugin callbacks are no longer publicly accessible
 * **BREAKING CHANGE** [iOS] Local notifications that launched the app should now only be processed by the plugin if they were created by the plugin.
+* **BREAKING CHANGE** `MethodChannel` argument has been removed from the named constructor that was visible for testing purposes
 
 # [1.0.0]
 * **BREAKING CHANGE** [iOS] Added checks to ensure callbacks are only invoked for notifications originating from the plugin to improve compatibility with other notification plugins.

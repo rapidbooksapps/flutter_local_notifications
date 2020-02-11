@@ -313,6 +313,12 @@ class _HomePageState extends State<HomePage> {
                       await _cancelAllNotifications();
                     },
                   ),
+                  PaddedRaisedButton(
+                    buttonText: 'Show notification with icon badge [iOS]',
+                    onPressed: () async {
+                      await _showNotificationWithIconBadge();
+                    },
+                  ),
                 ],
               ),
             ),
@@ -375,7 +381,7 @@ class _HomePageState extends State<HomePage> {
         ledOnMs: 1000,
         ledOffMs: 500);
     var iOSPlatformChannelSpecifics =
-        IOSNotificationDetails(sound: "slow_spring_board.aiff");
+        IOSNotificationDetails(sound: 'slow_spring_board.aiff');
     var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.schedule(
@@ -830,6 +836,17 @@ class _HomePageState extends State<HomePage> {
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(0, 'public notification title',
         'public notification body', platformChannelSpecifics,
+        payload: 'item x');
+  }
+
+  Future<void> _showNotificationWithIconBadge() async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'icon badge channel', 'icon badge name', 'icon badge description');
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(badgeNumber: 1);
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+        0, 'icon badge title', 'icon badge body', platformChannelSpecifics,
         payload: 'item x');
   }
 
