@@ -3,6 +3,7 @@
 #import "NotificationDetails.h"
 
 
+static FlutterLocalNotificationsPlugin *gFlutterLocalNotificationPlugin;
 
 @implementation FlutterLocalNotificationsPlugin{
     FlutterMethodChannel* _channel;
@@ -73,6 +74,10 @@ typedef NS_ENUM(NSInteger, RepeatInterval) {
     Daily,
     Weekly
 };
+
++(FlutterLocalNotificationsPlugin*) instance {
+    return gFlutterLocalNotificationPlugin;
+}
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     FlutterMethodChannel *channel = [FlutterMethodChannel
@@ -163,7 +168,8 @@ typedef NS_ENUM(NSInteger, RepeatInterval) {
         requestedBadgePermission = [arguments[REQUEST_BADGE_PERMISSION] boolValue];
     }
     [self requestPermissionsImpl:requestedSoundPermission alertPermission:requestedAlertPermission badgePermission:requestedBadgePermission checkLaunchNotification:true result:result];
-    
+
+    gFlutterLocalNotificationPlugin = self;
     _initialized = true;
 }
 
