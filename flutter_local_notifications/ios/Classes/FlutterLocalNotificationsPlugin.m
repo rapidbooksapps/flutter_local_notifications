@@ -85,6 +85,7 @@ typedef NS_ENUM(NSInteger, RepeatInterval) {
                                      binaryMessenger:[registrar messenger]];
     
     FlutterLocalNotificationsPlugin* instance = [[FlutterLocalNotificationsPlugin alloc] initWithChannel:channel registrar:registrar];
+    gFlutterLocalNotificationPlugin = instance;
     [registrar addApplicationDelegate:instance];
     [registrar addMethodCallDelegate:instance channel:channel];
 }
