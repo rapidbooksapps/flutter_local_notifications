@@ -4,6 +4,7 @@
 
 
 static FlutterLocalNotificationsPlugin *gFlutterLocalNotificationPlugin;
+static NSString* gLaunchPayload;
 
 @implementation FlutterLocalNotificationsPlugin{
     FlutterMethodChannel* _channel;
@@ -79,13 +80,16 @@ typedef NS_ENUM(NSInteger, RepeatInterval) {
     return gFlutterLocalNotificationPlugin;
 }
 
++(void) setLaunchPayload:(NSString *)payload {
+    gLaunchPayload = payload;
+}
+
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     FlutterMethodChannel *channel = [FlutterMethodChannel
                                      methodChannelWithName:CHANNEL
                                      binaryMessenger:[registrar messenger]];
     
     FlutterLocalNotificationsPlugin* instance = [[FlutterLocalNotificationsPlugin alloc] initWithChannel:channel registrar:registrar];
-    gFlutterLocalNotificationPlugin = instance;
     [registrar addApplicationDelegate:instance];
     [registrar addMethodCallDelegate:instance channel:channel];
 }
@@ -209,8 +213,9 @@ typedef NS_ENUM(NSInteger, RepeatInterval) {
             authorizationOptions += UNAuthorizationOptionBadge;
         }
         [center requestAuthorizationWithOptions:(authorizationOptions) completionHandler:^(BOOL granted, NSError * _Nullable error) {
-            if(checkLaunchNotification && self->_launchPayload != nil) {
-                [self handleSelectNotification:self->_launchPayload];
+            if(checkLaunchNotification && gLaunchPayload != nil) {
+                [self handleSelectNotification:gLaunchPayload];
+                gLaunchPayload = nil;
             }
             result(@(granted));
         }];
